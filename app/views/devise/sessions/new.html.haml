@@ -1,0 +1,30 @@
+- content_for :head do
+  :css
+    .meat {background-color:transparent;}
+    p.first {float:left;margin-right:5px;}
+    a {margin-left:0px;}
+    #info {display:none;background-color: white;padding:15px;}
+.sign-in-container
+  %h1 CastJelly
+  %p.first A site for all of your podcasts in one place. 
+  %a#learn-more Learn More
+  .clear
+  #info
+    %p.small CastJelly is a podcast aggregation site. Think of it like an rss feed for all of your podcasts. Currently, there is no service that collects podcasts and keeps users up to date with new content from the shows they listen to on the web. There is also no service right now that allows for an easy and convenient way to discover new podcasts that may be relevant to the user. iTunes and SoundCloud are the two best services right now for serving podcasts, but even these do not place much focus on this medium. This is the gap that CastJelly is going to fill. It’s going to keep track of all the shows you listen to, let you see what your friends are listening to, see what’s up and coming, and informs you of shows that you might be interested in listening to. <br><br> I don't know how far I am going to get with this project, but I at least need to give it a try even if I do fail.
+  .clear
+  = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+    = f.email_field :email, :autofocus => true, :placeholder => "Email Address", :class => "input-control"
+    = f.password_field :password, :placeholder => "Password", :class => "input-control"
+    = f.submit "sign in", :class => "btn"
+    - if devise_mapping.rememberable?
+      %div
+        = f.check_box :remember_me
+        = f.label :remember_me
+  = render "devise/shared/links"
+
+:javascript
+  $(document).ready(function() {
+    $('#learn-more').click(function() {
+      $("#info").slideToggle();
+    });
+  });

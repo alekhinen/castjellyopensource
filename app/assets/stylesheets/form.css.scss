@@ -1,0 +1,90 @@
+@import "colors";
+
+form {
+    .input-control {
+        border: 2px solid #bdc3c7;
+        color: #34495e;
+        min-height:43px;
+        font-size: 16px;
+        border-radius: 4px;
+        -webkit-appearance: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
+        transition: border .25s linear, color .25s linear, background-color .25s linear;
+
+        padding: 0px;
+        margin:5px;
+        margin-left:0px;
+        width: 235px;
+        padding-left: 5px;
+    }
+    .input-group.focus .input-control,
+    .input-control:focus {
+        border-color: $input-border;
+        outline: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    .error {
+      color: #e74c3c !important;
+      border-color: #e74c3c !important;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+
+    label.error {
+        float: right;
+        font-size: 12px;
+    }
+
+}
+
+input {
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+    font-family: "Helvetica-neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+label {
+    font-family: "Helvetica-neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+}
+
+.btn {
+    border: 2px solid $input-border;
+    border-radius: 4px;
+    color: $input-border;
+    padding: 10px;
+    width:235px;
+    font-weight: bold;
+    background-color: transparent;
+    height:43px;
+
+    -webkit-transition: color 500ms, background-color 500ms, opacity 100ms;
+    transition: color 500ms, background-color 500ms, opacity 100ms;
+
+    &:hover {
+        background-color: $input-border;
+        color: $background;
+        cursor:pointer;
+    }
+
+    &:active {
+        opacity: 0.7;
+    }
+}
+
+.btn-danger {
+    border: 2px solid $red;
+    color: $red;
+
+    &:hover {
+        background-color: $red;
+        color: $background;
+    }
+}
+
+  

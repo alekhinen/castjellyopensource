@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %title CastJelly
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+    = yield :head
+  %body
+    .container
+      / - if notice
+      /   %p.alert.alert-notice= notice
+      / - if alert
+      /   %p.alert.alert-error= alert
+      - if user_signed_in?
+        .side-menu
+          = render "layouts/side_menu"
+      .meat
+        = yield

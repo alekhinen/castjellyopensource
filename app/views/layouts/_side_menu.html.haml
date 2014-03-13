@@ -1,0 +1,24 @@
+%a.side-link{:href => "#{root_url}"}
+  =image_tag('icons/home.svg', :class => "side-icon")
+  Home
+%a.side-link{:href => "#"}
+  =image_tag('icons/star.svg', :class => "side-icon")
+  Saved Podcasts
+%a.side-link{:href => "#{podcasts_url}"}
+  =image_tag('icons/plus.svg', :class => "side-icon")
+  Add Content
+
+.padder40
+
+%a.side-link{:href => "#"}
+  =image_tag('icons/menu.svg', :class => "side-icon")
+  All Content
+
+.padder40
+
+- if user_signed_in?
+  %a.side-link{:href => "#{edit_user_registration_path}"}
+    =image_tag('icons/user.svg', :class => "side-icon")
+    #{current_user.email}
+  .padder20
+  #{link_to "Logout", destroy_user_session_path, method: :delete, :class => 'btn'}

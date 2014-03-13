@@ -1,0 +1,13 @@
+- content_for :head do
+  :css
+    .meat {background-color:transparent;} 
+.sign-up-container
+  %h1 Sign up
+  %p A site for all of your podcasts in one place.
+  = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+    = devise_error_messages!
+    = f.email_field :email, :autofocus => true, :placeholder => "Email Address", :class => "input-control"
+    = f.password_field :password, :placeholder => "Password", :class => "input-control"
+    = f.password_field :password_confirmation, :placeholder => "Password Confirmation", :class => "input-control"
+    = f.submit "Sign up", :class => "btn"
+  = render "devise/shared/links"

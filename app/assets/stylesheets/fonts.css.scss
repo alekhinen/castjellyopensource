@@ -1,0 +1,30 @@
+
+// Main mixin for new fonts
+@mixin declare-font-face($font-family,
+                         $font-path, 
+                         $font-filename, 
+                         $font-weight : normal, 
+                         $font-style :normal, 
+                         $font-stretch : normal) {
+    @font-face {
+        font-family: '#{$font-family}';
+        src: image-url('#{$font-path}' + 'EOT/' + ('#{$font-filename}.eot'));
+        // src: url(font-path('#{$font-filename}.eot?#iefix')) format('embedded-opentype'),
+        src: image-url('#{$font-path}' + 'WOFF/' + ('#{$font-filename}.woff')) format('woff'),
+             image-url('#{$font-path}' + 'TTF/' + ('#{$font-filename}.ttf')) format('truetype'),
+             image-url('#{$font-path}' + 'SVG/' + ('#{$font-filename}.svg')) format('svg');
+        font-weight: $font-weight;
+        font-style: $font-style;
+        font-stretch: $font-stretch;
+    }
+}
+
+// ClearSans Font
+@include declare-font-face('ClearSans', 'fonts/ClearSans/', 'ClearSans-Bold', 700);
+@include declare-font-face('ClearSans', 'fonts/ClearSans/', 'ClearSans-BoldItalic', 700, italic);
+@include declare-font-face('ClearSans', 'fonts/ClearSans/', 'ClearSans-Italic', 400, italic);
+@include declare-font-face('ClearSans', 'fonts/ClearSans/', 'ClearSans-Light', 200);
+@include declare-font-face('ClearSans', 'fonts/ClearSans/', 'ClearSans-Medium', 500);
+@include declare-font-face('ClearSans', 'fonts/ClearSans/', 'ClearSans-MediumItalic', 500, italic);
+@include declare-font-face('ClearSans', 'fonts/ClearSans/', 'ClearSans-Regular', 500);
+@include declare-font-face('ClearSans', 'fonts/ClearSans/', 'ClearSans-Thin', 100);

@@ -1,0 +1,133 @@
+@import "colors";
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Generics ///////////////////////////////////////////////////////////////////
+*
+{
+  padding: 0;
+  margin: 0;
+
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+body, html {
+    background: $background;
+    height: 100%;
+    width:100%;
+}
+
+.clear {clear:both;}
+.padder20 {height:20px;}
+.padder40 {height:40px;}
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Page-Specific //////////////////////////////////////////////////////////////
+.container {
+  height:100%;
+}
+
+.side-menu {
+  background-color: $background + 5;
+  border-right: 1px solid $border;
+  width: 260px;
+  padding: 15px; 
+  padding-top:50px;
+  height:100%;
+  position:absolute;
+  left:0px;
+  top:0px;
+
+  .side-icon {
+    float:left;
+    margin:5px;
+    margin-right:9px;
+    width:16px;
+    height:16px;
+    opacity:0.6;
+    border-style:none;
+
+    transition: 500ms;
+
+    &:hover {
+      opacity:1;
+      cursor:pointer;
+    }
+  }
+
+  .side-link {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 26px;
+    color: $header-text;
+    opacity: 0.6;
+    font-family: "ClearSans";
+    display: block;
+
+    transition: 500ms;
+
+    &:hover {
+      opacity: 1;
+      cursor:pointer;
+      text-decoration: none;
+    }
+  }
+}
+
+.meat {
+  margin-left:260px;
+  padding: 15px;
+  background: white;
+  max-width: 1000px;
+  min-width: 750px;
+  height:100%;
+  overflow:auto;
+}
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Scaffolds //////////////////////////////////////////////////////////////////
+#notice {
+  color: green;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff;
+  }
+  ul li {
+    font-size: 12px;
+    list-style: square;
+  }
+}
