@@ -7,7 +7,8 @@ gem 'sass-rails', '~> 4.0.0'       # Use SCSS for stylesheets
 gem 'haml', '~> 4.0.5'             # Use HAML for html pages
 gem 'uglifier', '>= 1.3.0'         # Use Uglifier as compressor for JavaScript assets
 gem 'coffee-rails', '~> 4.0.0'     # Use CoffeeScript for .js.coffee assets and views
-gem 'devise'
+gem 'devise'                       # User Engine
+gem 'newrelic_rpm'                 # Heroku addon for site traffic visualization
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
