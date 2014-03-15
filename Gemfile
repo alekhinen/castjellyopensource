@@ -9,6 +9,7 @@ gem 'uglifier', '>= 1.3.0'         # Use Uglifier as compressor for JavaScript a
 gem 'coffee-rails', '~> 4.0.0'     # Use CoffeeScript for .js.coffee assets and views
 gem 'devise'                       # User Engine
 gem 'newrelic_rpm'                 # Heroku addon for site traffic visualization
+gem 'mandrill-api'                 # Heroku addon for SMTP mail
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

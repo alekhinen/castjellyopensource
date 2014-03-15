@@ -1,0 +1,28 @@
+%h1 Listing podcasts
+%table
+  %thead
+    %tr
+      %th Title
+      %th Description
+      %th Link
+      %th Tags
+      %th Views
+      %th Created at
+      %th
+      %th
+      %th
+  %tbody
+    - @podcasts.each do |podcast|
+      %tr
+        %td= podcast.title
+        %td= podcast.description
+        %td= podcast.link
+        %td= podcast.tags
+        %td= podcast.views
+        %td= podcast.created_at
+        %td= link_to 'Show', podcast
+        %td= link_to 'Edit', edit_podcast_path(podcast)
+        %td= link_to 'Destroy', podcast, method: :delete, data: { confirm: 'Are you sure?' }
+%br
+  - if current_user.admin
+    = link_to 'New Podcast', new_podcast_path

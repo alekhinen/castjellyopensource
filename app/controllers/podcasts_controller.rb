@@ -14,7 +14,11 @@ class PodcastsController < ApplicationController
 
   # GET /podcasts/new
   def new
-    @podcast = Podcast.new
+    if current_user.admin
+      @podcast = Podcast.new
+    else
+      redirect_to root_url
+    end
   end
 
   # GET /podcasts/1/edit
@@ -24,40 +28,52 @@ class PodcastsController < ApplicationController
   # POST /podcasts
   # POST /podcasts.json
   def create
-    @podcast = Podcast.new(podcast_params)
+    if current_user.admin
+      @podcast = Podcast.new(podcast_params)
 
-    respond_to do |format|
-      if @podcast.save
-        format.html { redirect_to @podcast, notice: 'Podcast was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @podcast }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @podcast.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @podcast.save
+          format.html { redirect_to @podcast, notice: 'Podcast was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @podcast }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @podcast.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to root_url
     end
   end
 
   # PATCH/PUT /podcasts/1
   # PATCH/PUT /podcasts/1.json
   def update
-    respond_to do |format|
-      if @podcast.update(podcast_params)
-        format.html { redirect_to @podcast, notice: 'Podcast was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @podcast.errors, status: :unprocessable_entity }
+    if current_user.admin
+      respond_to do |format|
+        if @podcast.update(podcast_params)
+          format.html { redirect_to @podcast, notice: 'Podcast was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: 'edit' }
+          format.json { render json: @podcast.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to root_url
     end
   end
 
   # DELETE /podcasts/1
   # DELETE /podcasts/1.json
   def destroy
-    @podcast.destroy
-    respond_to do |format|
-      format.html { redirect_to podcasts_url }
-      format.json { head :no_content }
+    if current_user.admin
+      @podcast.destroy
+      respond_to do |format|
+        format.html { redirect_to podcasts_url }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to root_url
     end
   end
 

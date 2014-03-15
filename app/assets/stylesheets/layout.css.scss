@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-// User ///////////////////////////////////////////////////////////////////////
+// Layout /////////////////////////////////////////////////////////////////////
 
 // This sheet is used for generic styles that apply to all pages.
 
@@ -19,6 +19,8 @@
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box;    /* Firefox, other Gecko */
   box-sizing: border-box;         /* Opera/IE 8+ */
+
+  font-family: "Helvetica-neue", Helvetica, Arial, sans-serif;
 }
 
 body, html {

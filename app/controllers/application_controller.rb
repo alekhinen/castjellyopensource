@@ -5,4 +5,5 @@ class ApplicationController < ActionController::Base
 
   # Force user to be redirected to login page if not logged in
   before_action :authenticate_user!
+
 end
