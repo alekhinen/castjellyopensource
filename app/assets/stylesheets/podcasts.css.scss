@@ -1,9 +1,12 @@
-@import "colors";
-
+///////////////////////////////////////////////////////////////////////////////
+// Podcasts ///////////////////////////////////////////////////////////////////
 // Place all the styles related to the Podcasts controller here.
 
+@import "colors";
 
-// Main container for podcasts
+
+// Main container for podcast
+// @used podcasts/show
 .podcast-container {
 
     // Header (LHS)
@@ -30,5 +33,54 @@
         border-radius: 3px;
         border: 1px solid $border;
         padding: 4px;
+    }
+}
+
+// Main container for list of generics (podcasts or shows) 
+// @used podcasts/show
+// @used podcasts/index
+.generics-container, .shows-container, .podcasts-container {
+    border: 2px solid $border;
+    background: $background + 5;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border-radius: 4px;
+    padding: 0px;
+
+    h1 {
+        padding-left:21px;
+        padding-right:21px;
+    }
+
+    a.title {
+        font-size: 21px;
+        font-weight: 500;
+        margin:0px;
+    }
+
+    .generic-container, .show-container, .podcast-container {
+        border-top: 2px solid $border;
+        padding: 21px;
+
+        transition: 500ms;
+
+        &:hover {
+            background: $background - 9;
+        }
+
+    }
+
+    .odd {background: $background}
+    .even {background: $background + 9;}
+}
+
+.podcasts-container {
+    h1 {
+        float: left;
+    }
+
+    #new-podcast-btn {
+        float: right;
+        margin: 19px;
     }
 }

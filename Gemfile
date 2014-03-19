@@ -14,6 +14,7 @@ gem 'devise'                       # User Engine
 gem 'newrelic_rpm'                 # Heroku addon for site traffic visualization
 gem 'mandrill-api'                 # Heroku addon for SMTP mail
 gem 'feedjira'                     # RSS parser
+gem 'kaminari'                     # Paginator
 
 
                    

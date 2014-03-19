@@ -12,13 +12,27 @@ class ShowsController < ApplicationController
     add_entries(feed.entries, podcast_id)
   end
 
+  # Update feed continuously
+  def self.update_from_feed_continuously(feed_url, delay_interval = 15.minutes)
+    feed = Feedzirra::Feed.fetch_and_parse(feed_url)
+    add_entries(feed.entries)
+    loop do
+      sleep delay_interval
+      feed = Feedzirra::Feed.update(feed)
+      add_entries(feed.new_entries) if feed.updated?
+    end
+  end
+
   # Add new entries to the show model
   def self.add_entries(entries, podcast_id)
     entries.each do |entry|
       # remove special characters from guid of entry
       @entry_id = entry.id.gsub(/[^0-9A-Za-z]/, '')
       # if the show does not exist, create a new Show entry
-      unless Show.exists?(:guid => @entry_id)
+      unless Show.exists?(:guid       => @entry_id, 
+                          :title      => entry.title, 
+                          :link       => entry.url, 
+                          :podcast_id => podcast_id)
         Show.create(:title        => entry.title, 
                     :description  => entry.summary, 
                     :link         => entry.url, 
@@ -28,9 +42,6 @@ class ShowsController < ApplicationController
       end
     end
   end
-
-
-
 
 
 

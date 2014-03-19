@@ -10,6 +10,10 @@ class PodcastsController < ApplicationController
   # GET /podcasts/1
   # GET /podcasts/1.json
   def show
+    # Get shows associated with this podcast
+    @shows = Show.where(:podcast_id => params[:id]).order('published_at DESC')
+    # Paginate the @shows array
+    @shows = Kaminari.paginate_array(@shows).page(params[:page]).per(20)
   end
 
   # GET /podcasts/new

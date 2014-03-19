@@ -65,11 +65,12 @@ label {
     border: 2px solid $input-border;
     border-radius: 4px;
     color: $input-border;
-    padding: 10px;
-    width:235px;
+    padding: 11px;
+    max-width:235px;
+    width:100%;
     font-weight: bold;
     background-color: transparent;
-    height:43px;
+    height:auto;
     text-align:center;
 
     -webkit-transition: color 500ms, background-color 500ms, opacity 100ms;
@@ -83,6 +84,15 @@ label {
 
     &:active {
         opacity: 0.7;
+    }
+}
+
+.btn-success {
+    color: $green;
+    border: 2px solid $green;
+
+    &:hover {
+        background-color: $green;
     }
 }
 
@@ -103,6 +113,14 @@ label {
 
     &:hover {
         background-color: $green;
+    }
+}
+
+
+a.btn {
+    display:block;
+    &:hover {
+        text-decoration: none;
     }
 }
 

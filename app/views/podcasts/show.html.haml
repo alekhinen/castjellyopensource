@@ -10,8 +10,20 @@
     %p #{@podcast.description}
   .header-right
     %p image placeholder
-
+  
   .clear
+
+.shows-container
+  %h1 Shows
+  - if @shows.count == 0
+    .show-container.even
+      %h6 No shows available :(
+  - @shows.each do |show|
+    .show-container{:class => cycle('even', 'odd')}
+      %a.title{:href => "#{show.link}", :target => "_blank"} #{show.title}
+      %p.small #{show.description}
+
+= paginate @shows
 
 
 

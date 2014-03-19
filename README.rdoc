@@ -1,28 +1,30 @@
-== README
+== CastJelly
+CastJelly is a podcast aggregation site to make keeping track of your favorite podcasts easy. It will also offer social integration to see what your friends are listening to (like Spotify) and make discovering new podcasts a better experience than it is right now. 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+=== Technologies Used
+* Ruby (2.0.0)
+* Ruby on Rails (4.0.2)
+* HAML
+* SASS
+* SQLite 3 (local development)
+* PostgreSQL (production)
+* Heroku Cedar Stack (production)
+* Mandrill (mailing client)
+* New Relic (site analytics)
 
-Things you may want to cover:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
+=== TODO
+==== Podcasts
+* Cron job for updating podcast shows every 24 hours - {Clockwork Gem?}[https://github.com/tomykaira/clockwork]
+* Parse images for both podcast and shows - {Paperclip gem?}[https://github.com/thoughtbot/paperclip]
+==== Shows
+* Add an audio player to stream audio files associated with shows
+* Add audio_link row to shows table
+==== Users
+* "Follow" functionality for podcasts
+* Facebook login - Omniauth[https://github.com/intridea/omniauth]
+* Friends list
+* Social feed on RHS of page
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.

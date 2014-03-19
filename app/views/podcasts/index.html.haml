@@ -1,29 +1,34 @@
-%h1 Listing podcasts
-%table
-  %thead
-    %tr
-      %th Title
-      %th Description
-      %th Link
-      %th Tags
-      %th Views
-      %th Created at
-      %th
-      %th
-      %th
-  %tbody
-    - @podcasts.each do |podcast|
-      %tr
-        %td= podcast.title
-        %td= podcast.description
-        %td= podcast.link
-        %td= podcast.tags
-        %td= podcast.views
-        %td= podcast.created_at
-        %td= link_to 'Show', podcast
-        - if current_user.admin
-          %td= link_to 'Edit', edit_podcast_path(podcast)
-          %td= link_to 'Destroy', podcast, method: :delete, data: { confirm: 'Are you sure?' }
-%br
+%h1 CastJelly
+.podcasts-container
+  %h1 Podcasts
   - if current_user.admin
-    = link_to 'New Podcast', new_podcast_path
+    = link_to 'New Podcast', new_podcast_path, :class => "btn btn-success", :id => "new-podcast-btn"
+  .clear
+  - @podcasts.each do |podcast|
+    .podcast-container{:class => cycle('even', 'odd')}
+      %a.title{:href => "#{podcast_path(podcast)}"} #{podcast.title}
+      %p.small #{podcast.description}
+      - if current_user.admin
+        = link_to 'Edit', edit_podcast_path(podcast), :class => "btn btn-success"
+        = link_to 'Destroy', podcast, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"
+
+
+
+
+
+/   %tbody
+/     - @podcasts.each do |podcast|
+/       %tr
+/         %td= podcast.title
+/         %td= podcast.description
+/         %td= podcast.link
+/         %td= podcast.tags
+/         %td= podcast.views
+/         %td= podcast.created_at
+/         %td= link_to 'Show', podcast
+/         - if current_user.admin
+/           %td= link_to 'Edit', edit_podcast_path(podcast)
+/           %td= link_to 'Destroy', podcast, method: :delete, data: { confirm: 'Are you sure?' }
+/ %br
+/   - if current_user.admin
+/     = link_to 'New Podcast', new_podcast_path
