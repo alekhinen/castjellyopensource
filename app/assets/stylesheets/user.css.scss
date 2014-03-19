@@ -6,6 +6,10 @@
 
 @import "colors";
 
+form {
+    position:relative;
+}
+
 .sign-in-container {
     max-width: 768px;
     height: 350px;
@@ -51,5 +55,26 @@ a {
 
     &:hover {
         text-decoration: underline;
+    }
+}
+
+
+#new_user {
+    label.error {
+        font-size: 12px;
+        position: absolute;
+        margin-left: -233px;
+        margin-top: 49px;
+    }
+
+    .field_with_errors {
+        padding:0px;
+        background: transparent;
+        display: block;
+        float: left;
+
+        input {
+            border: 2px solid $red;
+        }
     }
 }

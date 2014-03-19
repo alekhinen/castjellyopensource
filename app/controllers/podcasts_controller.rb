@@ -29,10 +29,20 @@ class PodcastsController < ApplicationController
   # POST /podcasts.json
   def create
     if current_user.admin
-      @podcast = Podcast.new(podcast_params)
+      # Get the rss_link POST data and fetch and parse that link
+      @feed = Feedjira::Feed.fetch_and_parse(params[:podcast][:rss_link])
+      # Create a new Podcast
+      @podcast = Podcast.new(:title       => @feed.title, 
+                             :description => @feed.itunes_summary, 
+                             :link        => @feed.url, 
+                             :rss_link    => @feed.feed_url, 
+                             :tags        => @feed.itunes_keywords)
+
+      # @podcast = Podcast.new(podcast_params)
 
       respond_to do |format|
         if @podcast.save
+          ShowsController.update_from_feed(@podcast.rss_link, @podcast.id)
           format.html { redirect_to @podcast, notice: 'Podcast was successfully created.' }
           format.json { render action: 'show', status: :created, location: @podcast }
         else
@@ -85,6 +95,6 @@ class PodcastsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def podcast_params
-      params.require(:podcast).permit(:title, :description, :link, :tags, :views, :created_at)
+      params.require(:podcast).permit(:title, :description, :link, :rss_link, :tags, :views, :created_at)
     end
 end

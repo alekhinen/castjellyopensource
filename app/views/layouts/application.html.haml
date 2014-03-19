@@ -8,12 +8,12 @@
     = yield :head
   %body
     .container
-      / - if notice
-      /   %p.alert.alert-notice= notice
-      / - if alert
-      /   %p.alert.alert-error= alert
       - if user_signed_in?
         .side-menu
           = render "layouts/side_menu"
       .meat
+        - if notice
+          %p.alert.alert-notice= notice
+        - if alert
+          %p.alert.alert-error= alert
         = yield

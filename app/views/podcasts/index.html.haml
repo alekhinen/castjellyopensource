@@ -21,8 +21,9 @@
         %td= podcast.views
         %td= podcast.created_at
         %td= link_to 'Show', podcast
-        %td= link_to 'Edit', edit_podcast_path(podcast)
-        %td= link_to 'Destroy', podcast, method: :delete, data: { confirm: 'Are you sure?' }
+        - if current_user.admin
+          %td= link_to 'Edit', edit_podcast_path(podcast)
+          %td= link_to 'Destroy', podcast, method: :delete, data: { confirm: 'Are you sure?' }
 %br
   - if current_user.admin
     = link_to 'New Podcast', new_podcast_path

@@ -70,6 +70,7 @@ label {
     font-weight: bold;
     background-color: transparent;
     height:43px;
+    text-align:center;
 
     -webkit-transition: color 500ms, background-color 500ms, opacity 100ms;
     transition: color 500ms, background-color 500ms, opacity 100ms;
@@ -92,6 +93,16 @@ label {
     &:hover {
         background-color: $red;
         color: $background;
+    }
+}
+
+.follow-btn {
+    width:100px;
+    border: 2px solid $green;
+    color: $green;
+
+    &:hover {
+        background-color: $green;
     }
 }
 

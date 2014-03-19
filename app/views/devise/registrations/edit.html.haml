@@ -4,6 +4,10 @@
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
   = devise_error_messages!
   .clear
+    = f.text_field :full_name, :autofocus => true, :class => "input-control"
+    = f.label :full_name
+
+  .clear
     = f.email_field :email, :autofocus => true, :class => "input-control"
     = f.label :email
   - if devise_mapping.confirmable? && resource.pending_reconfirmation?
@@ -29,3 +33,68 @@
 .padder40
 .padder40
 #{button_to "Cancel my account", registration_path(resource_name), :class => "btn btn-danger", :data => { :confirm => "Are you sure?" }, :method => :delete}
+
+
+:javascript
+  $(document).ready(function() {
+
+    jQuery.validator.addMethod("containsSpace", function(value, element) {
+        return this.optional(element) || !(/^\w+$/i.test(value));
+    }, "Must have first and last name!");
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Validation /////////////////////////////////////////////////////////////
+    $("#edit_user").validate({
+      
+      /////////////////////////////////////////////////////////////////////////
+      // Rules ////////////////////////////////////////////////////////////////
+      rules: {
+
+        "user[current_password]": {
+          required: true,
+          minlength: 8
+        },
+
+        "user[full_name]": {
+          required: false,
+          containsSpace: true
+        },
+
+        "user[email]": {
+          required: true,
+          email: true
+        },
+
+        "user[password]": {
+          required: false,
+          minLength: 8
+        },
+
+        "user[password_confirmation]": {
+          required: false,
+          minLength: 8,
+          equalTo: "user[password]"
+        }
+
+      },
+      
+
+      /////////////////////////////////////////////////////////////////////////
+      // Error Messages ///////////////////////////////////////////////////////
+      messages: {
+
+        "user[full_name]": "Please enter a valid full name",
+        "user[email]": "Please enter a valid email address",
+        "user[password]": "Please provide a password",
+        "user[password_confirmation]": "Has to be the same as your password",
+        "user[current_password]": "Current password is required!"
+        
+      },
+
+      errorPlacement: function(error, element) {
+        $(element).after("<div class = 'clear'></div>", error);
+      }
+
+    });
+  });
+

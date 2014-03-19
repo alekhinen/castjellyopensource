@@ -1,6 +1,39 @@
 class ShowsController < ApplicationController
   before_action :set_show, only: [:show, :edit, :update, :destroy]
 
+
+  ###########################
+  # Feedjira ################
+  ###########################
+
+  # Update / add new entries to show model
+  def self.update_from_feed(feed_url, podcast_id)
+    feed = Feedjira::Feed.fetch_and_parse(feed_url)
+    add_entries(feed.entries, podcast_id)
+  end
+
+  # Add new entries to the show model
+  def self.add_entries(entries, podcast_id)
+    entries.each do |entry|
+      # remove special characters from guid of entry
+      @entry_id = entry.id.gsub(/[^0-9A-Za-z]/, '')
+      # if the show does not exist, create a new Show entry
+      unless Show.exists?(:guid => @entry_id)
+        Show.create(:title        => entry.title, 
+                    :description  => entry.summary, 
+                    :link         => entry.url, 
+                    :published_at => entry.published, 
+                    :guid         => @entry_id, 
+                    :podcast_id   => podcast_id)
+      end
+    end
+  end
+
+
+
+
+
+
   # GET /shows
   # GET /shows.json
   def index
@@ -12,30 +45,30 @@ class ShowsController < ApplicationController
   def show
   end
 
-  # GET /shows/new
-  def new
-    @show = Show.new
-  end
+  # # GET /shows/new
+  # def new
+  #   @show = Show.new
+  # end
 
   # GET /shows/1/edit
   def edit
   end
 
-  # POST /shows
-  # POST /shows.json
-  def create
-    @show = Show.new(show_params)
+  # # POST /shows
+  # # POST /shows.json
+  # def create
+  #   @show = Show.new(show_params)
 
-    respond_to do |format|
-      if @show.save
-        format.html { redirect_to @show, notice: 'Show was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @show }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @show.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #   respond_to do |format|
+  #     if @show.save
+  #       format.html { redirect_to @show, notice: 'Show was successfully created.' }
+  #       format.json { render action: 'show', status: :created, location: @show }
+  #     else
+  #       format.html { render action: 'new' }
+  #       format.json { render json: @show.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # PATCH/PUT /shows/1
   # PATCH/PUT /shows/1.json

@@ -6,4 +6,22 @@ class ApplicationController < ActionController::Base
   # Force user to be redirected to login page if not logged in
   before_action :authenticate_user!
 
+  before_action :configure_devise_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  # Permitted parameters for various actions
+  def configure_devise_permitted_parameters
+    registration_params = [:full_name, :email, :password, :password_confirmation]
+
+    if params[:action] == 'update'
+      devise_parameter_sanitizer.for(:account_update) { 
+        |u| u.permit(registration_params << :current_password, :full_name)
+      }
+    elsif params[:action] == 'create'
+      devise_parameter_sanitizer.for(:sign_up) { 
+        |u| u.permit(registration_params << :full_name) 
+      }
+    end
+  end
 end

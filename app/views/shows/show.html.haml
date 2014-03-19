@@ -1,0 +1,22 @@
+%p#notice= notice
+%p
+  %strong Title:
+  = @show.title
+%p
+  %strong Description:
+  = @show.description
+%p
+  %strong Link:
+  = @show.link
+%p
+  %strong Tags:
+  = @show.tags
+%p
+  %strong Views:
+  = @show.views
+%p
+  %strong Podcast:
+  = @show.podcast_id
+= link_to 'Edit', edit_show_path(@show)
+|
+\#{link_to 'Back', shows_path}
