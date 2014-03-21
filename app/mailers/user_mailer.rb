@@ -5,6 +5,6 @@ class UserMailer < ActionMailer::Base
   # Send an email to User stating that they are registered with the site
   def registration_confirmation(user)
     @user = user
-    mail(:to => "#{user.email}", :subject => "Registered")
+    mail(:to => "#{user.email}", :subject => "CastJelly - Registration Confirmation")
   end
 end

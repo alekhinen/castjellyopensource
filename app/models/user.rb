@@ -13,6 +13,15 @@ class User < ActiveRecord::Base
   ###########################
   validates_presence_of :full_name
   validates_format_of :full_name, :with => /^[^0-9`!@#\$%\^&*+_=]+$/, :multiline => true
+  
+
+  # Avatar ##################
+  has_attached_file :avatar,
+                    :url  => "/assets/users/:id/:style/:basename.:extension",
+                    :path => ":rails_root/public/assets/users/:id/:style/:basename.:extension",
+                    :default_url => "/assets/default_avatar.png"
+  validates_attachment_size :avatar, :less_than => 250.kilobytes
+  validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/png']
 
 
 

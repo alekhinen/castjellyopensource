@@ -11,17 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140318165200) do
+ActiveRecord::Schema.define(version: 20140321231614) do
 
   create_table "podcasts", force: true do |t|
     t.string   "title"
-    t.string   "description"
+    t.text     "description",        default: ""
     t.string   "link"
     t.string   "tags"
     t.integer  "views"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "rss_link",    default: "", null: false
+    t.string   "rss_link",           default: "", null: false
+    t.datetime "last_modified"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "shows", force: true do |t|
@@ -52,6 +57,10 @@ ActiveRecord::Schema.define(version: 20140318165200) do
     t.datetime "updated_at"
     t.boolean  "admin",                  default: false, null: false
     t.string   "full_name",              default: "",    null: false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

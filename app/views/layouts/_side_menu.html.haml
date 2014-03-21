@@ -1,3 +1,18 @@
+- if user_signed_in?
+  .user-info-container
+    .avatar-container
+      =image_tag current_user.avatar, :class => "avatar"
+    - if current_user.full_name
+      %a.side-link.update{:href => "#{edit_user_registration_path}"}
+        / =image_tag('icons/user.svg', :class => "side-icon")
+        #{current_user.full_name}
+    - else
+      %a.side-link{:href => "#{edit_user_registration_path}"}
+        =image_tag('icons/user.svg', :class => "side-icon")
+        #{current_user.email}
+    %a.update{:href => "#{edit_user_registration_path}"} Update Account
+  .padder20
+
 %a.side-link{:href => "#{root_url}"}
   =image_tag('icons/home.svg', :class => "side-icon")
   Home
@@ -17,8 +32,4 @@
 .padder40
 
 - if user_signed_in?
-  %a.side-link{:href => "#{edit_user_registration_path}"}
-    =image_tag('icons/user.svg', :class => "side-icon")
-    #{current_user.email}
-  .padder20
   #{link_to "Logout", destroy_user_session_path, method: :delete, :class => 'btn'}

@@ -78,3 +78,33 @@ a {
         }
     }
 }
+
+#edit_user {
+    .avatar-container {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        float:left;
+    }
+}
+
+
+.avatar-container {
+    -webkit-background-size: cover !important;
+    -moz-background-size: cover !important;
+    -o-background-size: cover !important;
+    background-size: cover !important;
+
+    width:235px;
+    height:235px;
+    max-width:100%;
+    max-height:100%;
+    overflow:hidden;
+    border-radius:235px;
+    border: 2px solid $header-text;
+
+    .avatar {
+        height:100%;
+        width:auto;
+        max-height:235px;
+    }
+}

@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 ruby '2.0.0'
 gem 'rails', '4.0.2'               # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'sqlite3', group: :development # Use sqlite3 as the database for Active Record
 gem 'sass-rails', '~> 4.0.0'       # Use SCSS for stylesheets
 gem 'haml', '~> 4.0.5'             # Use HAML for html pages
 gem 'uglifier', '>= 1.3.0'         # Use Uglifier as compressor for JavaScript assets
@@ -15,8 +14,14 @@ gem 'newrelic_rpm'                 # Heroku addon for site traffic visualization
 gem 'mandrill-api'                 # Heroku addon for SMTP mail
 gem 'feedjira'                     # RSS parser
 gem 'kaminari'                     # Paginator
+gem 'paperclip', '~> 4.1'          # Image uploader
+gem 'aws-sdk'                      # Amazon Web Services SDK
 
 
+group :development do
+    gem 'sqlite3'       # Use sqlite3 as the database for Active Record
+    gem "letter_opener" # Preview emails before sending them out
+end
                    
 
 

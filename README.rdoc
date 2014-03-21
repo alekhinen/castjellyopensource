@@ -17,6 +17,7 @@ CastJelly is a podcast aggregation site to make keeping track of your favorite p
 ==== Podcasts
 * Cron job for updating podcast shows every 24 hours - {Clockwork Gem?}[https://github.com/tomykaira/clockwork]
 * Parse images for both podcast and shows - {Paperclip gem?}[https://github.com/thoughtbot/paperclip]
+* Upload parsed images to {Amazon S3}[https://devcenter.heroku.com/articles/paperclip-s3]
 ==== Shows
 * Add an audio player to stream audio files associated with shows
 * Add audio_link row to shows table
@@ -25,6 +26,7 @@ CastJelly is a podcast aggregation site to make keeping track of your favorite p
 * Facebook login - Omniauth[https://github.com/intridea/omniauth]
 * Friends list
 * Social feed on RHS of page
+* Upload avatar to {Amazon S3}[https://devcenter.heroku.com/articles/paperclip-s3]
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.

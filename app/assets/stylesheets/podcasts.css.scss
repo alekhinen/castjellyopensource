@@ -25,14 +25,18 @@
     // Header (RHS)
     // @contains - image
     .header-right {
-        float:right;
-        width:200px;
-        height:200px;
-        background: $red;
-
+        float: right;
+        width: 200px;
+        height: 200px;
+        overflow: hidden;
         border-radius: 3px;
         border: 1px solid $border;
         padding: 4px;
+
+        img {
+            max-width:100%;
+            max-height:100%;
+        }
     }
 }
 
@@ -74,6 +78,9 @@
     .even {background: $background + 9;}
 }
 
+
+// Main container for list of podcasts
+// @used pocasts/index
 .podcasts-container {
     h1 {
         float: left;
@@ -82,5 +89,19 @@
     #new-podcast-btn {
         float: right;
         margin: 19px;
+    }
+
+    .image-container {
+        width: 100px;
+        height: 100px;
+        margin-right: 9px;
+        border-radius: 4px;
+        float: left;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+
+        }
     }
 }

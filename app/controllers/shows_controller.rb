@@ -12,14 +12,14 @@ class ShowsController < ApplicationController
     add_entries(feed.entries, podcast_id)
   end
 
-  # Update feed continuously
-  def self.update_from_feed_continuously(feed_url, delay_interval = 15.minutes)
-    feed = Feedzirra::Feed.fetch_and_parse(feed_url)
-    add_entries(feed.entries)
+  # Update / add new entries to show model from feed continuously (every 24 hours)
+  def self.update_from_feed_continuously(feed_url, podcast_id, delay_interval = 24.hours)
+    feed = Feedjira::Feed.fetch_and_parse(feed_url)
+    add_entries(feed.entries, podcast_id)
     loop do
       sleep delay_interval
-      feed = Feedzirra::Feed.update(feed)
-      add_entries(feed.new_entries) if feed.updated?
+      feed = Feedjira::Feed.update(feed)
+      add_entries(feed.new_entries, podcast_id) if feed.updated?
     end
   end
 

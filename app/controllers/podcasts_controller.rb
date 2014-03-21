@@ -36,11 +36,13 @@ class PodcastsController < ApplicationController
       # Get the rss_link POST data and fetch and parse that link
       @feed = Feedjira::Feed.fetch_and_parse(params[:podcast][:rss_link])
       # Create a new Podcast
-      @podcast = Podcast.new(:title       => @feed.title, 
-                             :description => @feed.itunes_summary, 
-                             :link        => @feed.url, 
-                             :rss_link    => @feed.feed_url, 
-                             :tags        => @feed.itunes_keywords)
+      @podcast = Podcast.new(:title         => @feed.title, 
+                             :description   => @feed.itunes_summary, 
+                             :link          => @feed.url, 
+                             :rss_link      => @feed.feed_url, 
+                             :tags          => @feed.itunes_keywords,
+                             :image         => URI.parse(@feed.itunes_image),
+                             :last_modified => @feed.last_modified)
 
       # @podcast = Podcast.new(podcast_params)
 
@@ -63,8 +65,19 @@ class PodcastsController < ApplicationController
   # PATCH/PUT /podcasts/1.json
   def update
     if current_user.admin
+      # Get the rss_link POST data and fetch and parse that link
+      @feed = Feedjira::Feed.fetch_and_parse(params[:podcast][:rss_link])
+
       respond_to do |format|
-        if @podcast.update(podcast_params)
+        # if @podcast.update(podcast_params)
+        if @podcast.update(:title         => @feed.title, 
+                           :description   => @feed.itunes_summary, 
+                           :link          => @feed.url, 
+                           :rss_link      => @feed.feed_url, 
+                           :tags          => @feed.itunes_keywords,
+                           :image         => URI.parse(@feed.itunes_image),
+                           :last_modified => @feed.last_modified)
+          ShowsController.update_from_feed(@podcast.rss_link, @podcast.id)
           format.html { redirect_to @podcast, notice: 'Podcast was successfully updated.' }
           format.json { head :no_content }
         else
