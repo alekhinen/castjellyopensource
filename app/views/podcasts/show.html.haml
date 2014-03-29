@@ -3,13 +3,17 @@
 .podcast-container
   .header-left
     %h1 #{@podcast.title}
-    .btn.follow-btn Follow
+    - if Subscription.where(:user_id => current_user.id, :podcast_id => @podcast.id).size >= 1
+      - @subscription = Subscription.where(:user_id => current_user.id, :podcast_id => @podcast.id).first
+      = button_to "Unsubscribe", subscription_path(@subscription), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"
+    - else
+      = button_to "Subscribe", subscribe_path(@podcast), method: :post, :class => "btn follow-btn"
     .clear
     %p.sub-title 4k Subscribers | #{@podcast.tags}
     %br
     %p #{@podcast.description}
   .header-right
-    =image_tag @podcast.image
+    =image_tag @podcast.image.url
   
   .clear
 

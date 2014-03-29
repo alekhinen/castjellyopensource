@@ -1,1 +1,23 @@
 %h1 CastJelly
+- if @podcasts.size == 0
+  %h5 You haven't subscribed to any content.
+  %a{:href => "#{podcasts_url}"} Try subscribing to some podcasts.
+- @podcasts.each do |podcast|
+  - @shows = Show.where(:podcast_id => podcast.id, :created_at => (48.hours.ago..Time.now)).order('published_at DESC').limit(10)
+  .latest-shows-container
+    .header
+      .podcast-image-container
+        =image_tag podcast.image.url
+      %h3 #{podcast.title}
+      %p #{podcast.description}
+      .clear
+    .shows-container
+      - @shows.each do |show|
+        .show-container{:class => cycle('even', 'odd')}
+          %a.title{:href => "#{show.link}", :target => "_blank"} #{show.title}
+          %p.small #{show.description}
+        .clear
+      #more_shows
+      .content-loader
+        =image_tag('icons/arrow_down.svg', :class => "drop-down-icon")
+        = link_to '', load_more_shows_path(:id => podcast.id), method: :post,  :remote => true

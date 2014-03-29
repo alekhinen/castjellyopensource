@@ -4,7 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-
+  # Many-to-many relationship between users and podcasts
+  has_many :subscriptions
+  has_many :podcasts, :through => :subscriptions
 
 
   
@@ -17,16 +19,10 @@ class User < ActiveRecord::Base
 
   # Avatar ##################
   has_attached_file :avatar,
-                    :url  => "/assets/users/:id/:style/:basename.:extension",
-                    :path => ":rails_root/public/assets/users/:id/:style/:basename.:extension",
                     :default_url => "/assets/default_avatar.png"
   validates_attachment_size :avatar, :less_than => 250.kilobytes
   validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/png']
 
-
-
-
-  
 
   ###########################
   # Emails ##################
@@ -37,23 +33,6 @@ class User < ActiveRecord::Base
     UserMailer.registration_confirmation(self).deliver
   end
 
-
-
-
-
-
-  # def active_for_authentication?
-  #   # Uncomment the below debug statement to view the properties of the returned self model values.
-  #   # logger.debug self.to_yaml
-
-  #   super && validates_full_name?
-  # end
-
-  # def validates_full_name?
-  #   validates_format_of :full_name, :with => /^[^0-9`!@#\$%\^&*+_=]+$/
-  #   # add any other characters you'd like to disallow inside the [ brackets ]
-  #   # metacharacters [, \, ^, $, ., |, ?, *, +, (, and ) need to be escaped with a \
-  # end
 
   
 end

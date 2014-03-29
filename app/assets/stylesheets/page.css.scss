@@ -1,3 +1,60 @@
 // Place all the styles related to the page controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "colors";
+
+// Main container for latest shows for podcasts
+// @used page/index
+.latest-shows-container {
+    border-left: 2px solid $border;
+    background: $background;
+    margin-bottom: 50px;
+
+    .header {
+        padding: 12px;
+    }
+
+    .shows-container {
+        margin:0px;
+        border:none;
+        border-radius:0px;
+    }
+}
+
+// The extra content loader for latest podcasts
+// @used page/index
+.content-loader {
+    position: relative;
+    background: $border;
+    transition: 500ms;
+
+    .drop-down-icon {
+        display: block;
+        margin: auto;
+        height: 21px;
+        opacity:0.6;
+
+        transition: 500ms;
+    }
+
+    .rotated {
+        transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+    }
+
+    a {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    &:hover {
+        background: $border - 10;
+        cursor: pointer;
+        .drop-down-icon {opacity: 1;}
+    }
+}

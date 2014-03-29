@@ -1,7 +1,7 @@
 - if user_signed_in?
   .user-info-container
     .avatar-container
-      =image_tag current_user.avatar, :class => "avatar"
+      =image_tag current_user.avatar.url, :class => "avatar"
     - if current_user.full_name
       %a.side-link.update{:href => "#{edit_user_registration_path}"}
         / =image_tag('icons/user.svg', :class => "side-icon")
@@ -18,14 +18,14 @@
   Home
 %a.side-link{:href => "#"}
   =image_tag('icons/star.svg', :class => "side-icon")
-  Saved Podcasts
+  Saved Shows
 %a.side-link{:href => "#{podcasts_url}"}
   =image_tag('icons/plus.svg', :class => "side-icon")
   Add Content
 
 .padder40
 
-%a.side-link{:href => "#"}
+%a.side-link{:href => "#{subscriptions_path}"}
   =image_tag('icons/menu.svg', :class => "side-icon")
   All Content
 

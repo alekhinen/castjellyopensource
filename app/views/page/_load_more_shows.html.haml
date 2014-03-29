@@ -1,0 +1,5 @@
+- @shows.each do |show|
+  .show-container{:class => cycle('even', 'odd')}
+    %a.title{:href => "#{show.link}", :target => "_blank"} #{show.title}
+    %p.small #{show.description}
+  .clear

@@ -12,8 +12,8 @@
         .side-menu
           = render "layouts/side_menu"
       .meat
-        - if notice
-          %p.alert.alert-notice= notice
-        - if alert
-          %p.alert.alert-error= alert
+        / - if notice
+        /   %p.alert.alert-notice= notice
+        / - if alert
+        /   %p.alert.alert-error= alert
         = yield

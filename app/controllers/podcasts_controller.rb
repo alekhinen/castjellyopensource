@@ -104,6 +104,30 @@ class PodcastsController < ApplicationController
     end
   end
 
+
+  #############################################################################
+  ## Subscription Methods #####################################################
+  # NOTE: I would like to move these methods over to subscriptions_controller
+
+  # Create subscription relationship between current user and podcast
+  # POST /podcasts/:id
+  def subscribe
+    @podcast = Podcast.where(:id => params[:id]).first
+    unless Subscription.where(:user_id => current_user.id, :podcast_id => params[:id]).size > 0
+      @subscription = Subscription.new(:user_id => current_user.id, :podcast_id => params[:id])
+      if @subscription.save
+        puts "Subscription successfully created!"
+        redirect_to @podcast, :notice => "successfully subscribed!"
+        # render :layout => false
+      else
+        puts "Subscription failed to be created!"
+        render :layout => false
+      end
+    end
+  end
+
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_podcast

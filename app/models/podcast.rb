@@ -2,6 +2,10 @@ class Podcast < ActiveRecord::Base
     #########################
     # Relationships #########
     has_many :shows, dependent: :destroy
+    
+    # Many-to-many relationship between podcasts and users
+    has_many :subscriptions
+    has_many :users, :through => :subscriptions
 
 
     #########################
@@ -11,9 +15,11 @@ class Podcast < ActiveRecord::Base
 
     # Avatar ##################
     has_attached_file :image,
-                      :url  => "/assets/podcasts/:id/:style/:basename.:extension",
-                      :path => ":rails_root/public/assets/podcasts/:id/:style/:basename.:extension",
                       :default_url => "/assets/default_podcast.png"
+
+    # :url  => "/assets/podcasts/:id/:style/:basename.:extension",
+    # :path => ":rails_root/public/assets/podcasts/:id/:style/:basename.:extension",
+
     validates_attachment_size :image, :less_than => 5.megabytes
     validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png']
     

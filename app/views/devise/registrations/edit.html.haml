@@ -30,7 +30,7 @@
   .clear
   - if @user.avatar
     .avatar-container
-      =image_tag @user.avatar, :class => "avatar"
+      =image_tag @user.avatar.url, :class => "avatar"
     = f.label "Current Avatar"
     .clear
   

@@ -1,4 +1,6 @@
-%h1 CastJelly
+%h1 CastJelly 
+%h4 All Podcasts
+%p This section contains all the content that you are currently able to subscribe to. <br> More content will be coming soon. 
 .podcasts-container
   %h1 Podcasts
   - if current_user.admin
@@ -6,8 +8,8 @@
   .clear
   - @podcasts.each do |podcast|
     .podcast-container{:class => cycle('even', 'odd')}
-      .image-container
-        =image_tag podcast.image
+      .podcast-image-container
+        =image_tag podcast.image.url
       %a.title{:href => "#{podcast_path(podcast)}"} #{podcast.title}
       %p.small #{podcast.description}
       .clear
