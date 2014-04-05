@@ -1,11 +1,20 @@
 class PodcastsController < ApplicationController
   before_action :set_podcast, only: [:show, :edit, :update, :destroy]
 
+
+  #############################################################################
+  ## Default Methods ##########################################################
+  #############################################################################
   # GET /podcasts
   # GET /podcasts.json
   def index
-    @podcasts = Podcast.all
+    if params[:search]
+        @podcasts = Podcast.search(params[:search]).order("created_at DESC")
+      else
+        @podcasts = Podcast.all.order('created_at DESC')
+      end
   end
+
 
   # GET /podcasts/1
   # GET /podcasts/1.json
@@ -16,6 +25,7 @@ class PodcastsController < ApplicationController
     @shows = Kaminari.paginate_array(@shows).page(params[:page]).per(20)
   end
 
+
   # GET /podcasts/new
   def new
     if current_user.admin
@@ -25,9 +35,11 @@ class PodcastsController < ApplicationController
     end
   end
 
+
   # GET /podcasts/1/edit
   def edit
   end
+
 
   # POST /podcasts
   # POST /podcasts.json
@@ -35,6 +47,10 @@ class PodcastsController < ApplicationController
     if current_user.admin
       # Get the rss_link POST data and fetch and parse that link
       @feed = Feedjira::Feed.fetch_and_parse(params[:podcast][:rss_link])
+      # @feed = Feedjira::Feed.fetch_raw(params[:podcast][:rss_link])
+      # @feed = Feedjira::Parser::ITunesRSS.parse(@feed)
+
+
       # Create a new Podcast
       @podcast = Podcast.new(:title         => @feed.title, 
                              :description   => @feed.itunes_summary, 
@@ -90,6 +106,7 @@ class PodcastsController < ApplicationController
     end
   end
 
+
   # DELETE /podcasts/1
   # DELETE /podcasts/1.json
   def destroy
@@ -105,12 +122,16 @@ class PodcastsController < ApplicationController
   end
 
 
+
+
+
   #############################################################################
-  ## Subscription Methods #####################################################
-  # NOTE: I would like to move these methods over to subscriptions_controller
+  ## Additional Methods #######################################################
+  #############################################################################
 
   # Create subscription relationship between current user and podcast
   # POST /podcasts/:id
+  # NOTE: I would like to move these methods over to subscriptions_controller
   def subscribe
     @podcast = Podcast.where(:id => params[:id]).first
     unless Subscription.where(:user_id => current_user.id, :podcast_id => params[:id]).size > 0
@@ -123,6 +144,21 @@ class PodcastsController < ApplicationController
         puts "Subscription failed to be created!"
         render :layout => false
       end
+    end
+  end
+
+
+  # Refresh a specific podcast's shows.
+  # PATCH/PUT /podcasts/:id/refresh
+  def refresh
+    @podcast = Podcast.find_by_id(params[:id])
+    puts "this is"
+    ShowsController.update_from_feed(@podcast.rss_link, @podcast.id)
+    puts "some straight"
+    respond_to do |format|
+      puts "bullshit"
+      format.html { redirect_to @podcast, notice: 'Podcast successfully refreshed!'}
+      format.json { head :no_content }
     end
   end
 

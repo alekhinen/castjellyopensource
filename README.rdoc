@@ -16,6 +16,7 @@ CastJelly is a podcast aggregation site to make keeping track of your favorite p
 === TODO
 ==== Podcasts
 * Cron job for updating podcast shows every 24 hours - {Clockwork Gem?}[https://github.com/tomykaira/clockwork]
+* Manual "refresh" button for users to update podcasts
 * Parse images for both podcast and shows - {Paperclip gem?}[https://github.com/thoughtbot/paperclip]
 * Upload parsed images to {Amazon S3}[https://devcenter.heroku.com/articles/paperclip-s3]
 ==== Shows
@@ -29,6 +30,10 @@ CastJelly is a podcast aggregation site to make keeping track of your favorite p
 * Upload avatar to {Amazon S3}[https://devcenter.heroku.com/articles/paperclip-s3]
 * Setup local enivronment emailer - {Letter Opener}[http://www.sitepoint.com/preview-your-rails-mail-with-letter-opener/]
 * Setup categories array column. Categories organize the podcasts that a user is "subscribed" to. 
+
+== BUG FIXES
+* Drop-down menu to see more podcasts in page/index only adds to the list on the first #show tag
+* The top menu is incorrectly styled. 
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.

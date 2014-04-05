@@ -13,6 +13,12 @@
     %a.update{:href => "#{edit_user_registration_path}"} Update Account
   .padder20
 
+= form_tag(podcasts_path, :method => "get", id: "search-form") do
+  = text_field_tag :search, params[:search], placeholder: "Search Podcasts"
+  = submit_tag "Search", :name => nil, :class => "btn"
+
+.padder20
+
 %a.side-link{:href => "#{root_url}"}
   =image_tag('icons/home.svg', :class => "side-icon")
   Home

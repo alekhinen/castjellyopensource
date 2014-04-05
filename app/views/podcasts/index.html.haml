@@ -1,17 +1,17 @@
-%h1 CastJelly 
-%h4 All Podcasts
-%p This section contains all the content that you are currently able to subscribe to. <br> More content will be coming soon. 
 .podcasts-container
   %h1 Podcasts
   - if current_user.admin
     = link_to 'New Podcast', new_podcast_path, :class => "btn btn-success", :id => "new-podcast-btn"
   .clear
+  .padded-container
+    %p.small This section contains all the content that you are currently able to subscribe to. <br> More content will be coming soon. 
   - @podcasts.each do |podcast|
     .podcast-container{:class => cycle('even', 'odd')}
       .podcast-image-container
         =image_tag podcast.image.url
-      %a.title{:href => "#{podcast_path(podcast)}"} #{podcast.title}
-      %p.small #{podcast.description}
+      .podcast-content-container
+        %a.title{:href => "#{podcast_path(podcast)}"} #{podcast.title}
+        %p.small #{podcast.description}
       .clear
       - if current_user.admin
         = link_to 'Edit', edit_podcast_path(podcast), :class => "btn btn-success"

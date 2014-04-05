@@ -10,7 +10,7 @@ class Podcast < ActiveRecord::Base
 
     #########################
     # Validations ###########
-    validates_presence_of :title, :description, :link, :rss_link, :tags
+    validates_presence_of :title, :description, :link, :rss_link #, :tags
     validates_uniqueness_of :title, :rss_link, :link
 
     # Avatar ##################
@@ -23,4 +23,8 @@ class Podcast < ActiveRecord::Base
     validates_attachment_size :image, :less_than => 5.megabytes
     validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png']
     
+
+    def self.search(query)
+      where("title like ?", "%#{query}%") 
+    end
 end

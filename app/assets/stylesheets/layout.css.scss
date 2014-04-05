@@ -43,10 +43,43 @@ body, html {
   height:100%;
 }
 
+// Used in layouts/_top_menu
+form#search-form {
+
+  input#search {
+    display: block;
+    border-radius: 4px;
+    padding: 11px;
+    border: 2px solid;
+    float: left;
+    margin-right: 10px;
+    color: $border - 50;
+
+    width: 70%;
+    float: left;
+    font-size: 9px;
+    padding: 8px;
+
+    transition: 500ms;
+
+    &:active, &:focus {
+      color: $header-text;
+      border-color: $header-text;
+      outline: 0;
+    }
+  }
+
+  .btn {
+    font-size: 9px;
+    padding: 7px;
+    width: auto;
+  }
+}
+
 .side-menu {
   background-color: $background + 5;
   border-right: 1px solid $border;
-  width: 260px;
+  width: 230px;
   padding: 15px; 
   padding-top:300px;
   height:100%;
@@ -119,15 +152,14 @@ body, html {
 }
 
 .meat {
-  margin-left:260px;
+  margin-left:230px;
   padding: 28px;
-  background: white;
+  background: $meat-bg;
   max-width: 1000%;
   min-width: 750px;
   height:100%;
   overflow:auto;
 }
-
 
 
 
