@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
   has_many :subscriptions
   has_many :podcasts, :through => :subscriptions
 
+  # Many-to-many relationship between users and shows
+  has_many :saves
+  has_many :shows, :through => :saves
+
 
   
   ###########################

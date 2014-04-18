@@ -6,7 +6,9 @@ class SubscriptionsController < ApplicationController
   def index 
     if current_user
       # Get all the subscriptions associated with the current_user
-      @subscriptions = Subscription.where(:user_id => current_user.id).order('created_at DESC')
+      # @subscriptions = Subscription.where(:user_id => current_user.id).order('created_at DESC')
+      @subscriptions = Subscription.where(:user_id => current_user.id).select(:podcast_id).to_sql
+      @podcasts = Podcast.where("id IN (#{@subscriptions})").order("updated_at DESC")
     else
       redirect_to root_url
     end

@@ -1,0 +1,12 @@
+%p These are all the shows you have saved.
+.shows-container
+  %h1 Saved Shows
+  .clear
+  - @shows.each do |show|
+    .show-container.saved-show-container{:class => cycle('even', 'odd')}
+      .mini-image.image-container
+        =image_tag show.image_url
+      %a.title{:href => "#{show_path(show)}", :style => "font-size:16px;line-height:50px;"} #{show.title}
+      .clear
+
+

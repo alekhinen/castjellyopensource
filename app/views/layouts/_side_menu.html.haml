@@ -22,7 +22,7 @@
 %a.side-link{:href => "#{root_url}"}
   =image_tag('icons/home.svg', :class => "side-icon")
   Home
-%a.side-link{:href => "#"}
+%a.side-link{:href => "#{saves_path}"}
   =image_tag('icons/star.svg', :class => "side-icon")
   Saved Shows
 %a.side-link{:href => "#{podcasts_url}"}
@@ -34,6 +34,15 @@
 %a.side-link{:href => "#{subscriptions_path}"}
   =image_tag('icons/menu.svg', :class => "side-icon")
   All Content
+- if user_signed_in?
+  - # Get all podcast_id's that are associated with the current_user
+  - @subscriptions = Subscription.where(:user_id => current_user.id).select(:podcast_id).to_sql
+  - # Get all podcasts that have the same id's as the subscriptions and order by by which one was updated last
+  - @podcasts = Podcast.where("id IN (#{@subscriptions})").order("updated_at DESC")
+  - @podcasts.each do |podcast|
+    %a.side-link{:href => "#{podcast_path(podcast)}", :style => "font-size: 10px;"}
+      = image_tag('icons/arrow-right.svg', :class => "side-icon")
+      #{podcast.title}
 
 .padder40
 

@@ -10,7 +10,7 @@
       - else
         = button_to "Subscribe", subscribe_path(@podcast), method: :post, :class => "btn follow-btn"
       .clear
-      %p.sub-title 4k Subscribers | #{@podcast.tags}
+      %p.sub-title #{@subscribers} Following | #{@podcast.tags}
       %br
       %p #{@podcast.description}
     .header-right
@@ -25,7 +25,9 @@
       %h6 No shows available :(
   - @shows.each do |show|
     .show-container{:class => cycle('even', 'odd')}
-      %a.title{:href => "#{show.link}", :target => "_blank"} #{show.title}
+      %a.title{:href => "#{show_path(show)}"} #{show.title}
+      %a{:href => "#{show.link}", :target => "_blank"}
+        %p.small Direct Link
       %p.small #{show.description}
 
 = paginate @shows

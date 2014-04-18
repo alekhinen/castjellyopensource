@@ -2,17 +2,15 @@
 .podcasts-container
   %h1 Subscribed Podcasts 
   .clear
-  - @subscriptions.each do |subscription|
-    - @podcast = Podcast.find_by_id(subscription.podcast_id)
-    
+  - @podcasts.each do |podcast|
     .podcast-container{:class => cycle('even', 'odd')}
       .podcast-image-container
-        =image_tag @podcast.image.url
-      %a.title{:href => "#{podcast_path(@podcast)}"} #{@podcast.title}
-      %p.small #{@podcast.description}
+        =image_tag podcast.image.url
+      %a.title{:href => "#{podcast_path(podcast)}"} #{podcast.title}
+      %p.small #{podcast.description}
       .clear
       - if current_user.admin
-        = link_to 'Edit', edit_podcast_path(@podcast), :class => "btn btn-success"
-        = link_to 'Destroy', @podcast, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"
+        = link_to 'Edit', edit_podcast_path(podcast), :class => "btn btn-success"
+        = link_to 'Destroy', podcast, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"
 
 

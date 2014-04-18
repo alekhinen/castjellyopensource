@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140322204413) do
+ActiveRecord::Schema.define(version: 20140408174211) do
 
   create_table "podcasts", force: true do |t|
     t.string   "title"
@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(version: 20140322204413) do
     t.datetime "image_updated_at"
   end
 
+  create_table "saves", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "show_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "shows", force: true do |t|
     t.string   "title"
     t.text     "description"
@@ -38,8 +45,9 @@ ActiveRecord::Schema.define(version: 20140322204413) do
     t.integer  "podcast_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "guid",         default: 0, null: false
+    t.integer  "guid",         default: 0,  null: false
     t.datetime "published_at"
+    t.string   "image_url",    default: ""
   end
 
   create_table "subscriptions", force: true do |t|

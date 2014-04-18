@@ -37,7 +37,8 @@ class ShowsController < ApplicationController
                     :description  => entry.summary, 
                     :link         => entry.url, 
                     :published_at => entry.published, 
-                    :guid         => @entry_id, 
+                    :guid         => @entry_id,
+                    :image_url    => entry.itunes_image,  
                     :podcast_id   => podcast_id)
       end
     end
@@ -102,6 +103,29 @@ class ShowsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to shows_url }
       format.json { head :no_content }
+    end
+  end
+
+
+  #############################################################################
+  ## Additional Methods #######################################################
+  #############################################################################
+
+  # Create save relationship between current user and show
+  # POST /shows/:id
+  # NOTE: I would like to move these methods over to saves_controller
+  def save
+    @show = Show.where(:id => params[:id]).first
+    unless Save.where(:user_id => current_user.id, :show_id => params[:id]).size > 0
+      @save = Save.new(:user_id => current_user.id, :show_id => params[:id])
+      if @save.save
+        puts "Save successfully created!"
+        redirect_to @show, :notice => "successfully saved!"
+        # render :layout => false
+      else
+        puts "Save failed to be created!"
+        render :layout => false
+      end
     end
   end
 

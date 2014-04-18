@@ -100,7 +100,7 @@
     }
 }
 
-.podcast-image-container {
+.podcast-image-container, .image-container {
     width: 90px;
     height: 90px;
     margin-right: 9px;
@@ -112,6 +112,11 @@
         max-height: 100%;
 
     }
+}
+
+.mini-image {
+    width:50px;
+    height:50px;
 }
 
 .podcast-content-container {

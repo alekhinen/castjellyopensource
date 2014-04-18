@@ -1,1 +1,18 @@
-<p>Thanks for registering!</p>
+<html>
+    <head>
+        <title>Thanks for registering!</title>
+        
+    </head>
+    <body style="background-color: #fafafa;">
+        <div class="meat" style="width: 900px;margin: auto;padding: 21px;padding-top: 0px;background-color: #F7F7F7;border-radius: 8px;">
+            <img class="top" src="https://s3.amazonaws.com/cast_jelly/email-banner.png" style="border-bottom: 2px solid #333333;">
+            <p style="font-size: 16px;font-family: &quot;HelveticaNeue-Light&quot;, &quot;Helvetica Neue Light&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Lucida Grande&quot;, sans-serif;font-weight: 300;">Hey <%= @user.full_name %>,</p>
+            <p style="font-size: 16px;font-family: &quot;HelveticaNeue-Light&quot;, &quot;Helvetica Neue Light&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Lucida Grande&quot;, sans-serif;font-weight: 300;">
+            Thanks for registering an account on <a href="http://www.castjelly.com" style="color: #ec2426;text-decoration: none;">CastJelly</a>!
+            <br>
+            If you have any questions, feel free to email me at <a href="mailto:nick@castjelly.com" style="color: #ec2426;text-decoration: none;">nick@castjelly.com</a>.
+            </p>
+            <p style="font-size: 16px;font-family: &quot;HelveticaNeue-Light&quot;, &quot;Helvetica Neue Light&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Lucida Grande&quot;, sans-serif;font-weight: 300;">Thanks, <br> Nick</p>
+        </div>
+    </body>
+</html>

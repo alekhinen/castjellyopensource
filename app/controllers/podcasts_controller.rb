@@ -21,6 +21,7 @@ class PodcastsController < ApplicationController
   def show
     # Get shows associated with this podcast
     @shows = Show.where(:podcast_id => params[:id]).order('published_at DESC')
+    @subscribers = Subscription.where(:podcast_id => params[:id]).count
     # Paginate the @shows array
     @shows = Kaminari.paginate_array(@shows).page(params[:page]).per(20)
   end
